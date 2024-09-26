@@ -1,0 +1,51 @@
+// ********** Starter Code *************
+
+import {UnoCard} from "https://adamprawitz.codehs.me/UnoCard.js";
+    
+// constants
+const TABLE_SIZE = 500;
+const CARD_WIDTH = TABLE_SIZE / 4;
+const CARD_HEIGHT = TABLE_SIZE / 2.5;
+
+
+//Start all functions.
+let hand = [];
+
+function start(){
+    setupTable();
+    dealCards();
+    drawTable();
+}
+
+
+// This function that draws a card that represents the specified color and number and displays it on the screen.
+function dealCards(){
+    let number = ["5", "4", "3", "9", "7", "0", "7"];
+    let color = ["Yellow", "Yellow", "Blue", "Yellow", "Yellow", "Red", "Red"];
+    let card = new UnoCard("Red", "+2", CARD_WIDTH, CARD_HEIGHT);
+    let a = 0;
+    card.setPosition(getWidth()/2 - CARD_WIDTH/2, 0);
+    hand.push(card);
+    for(let i = 0; i < 7; i++){
+        let card = new UnoCard(color[i], number[i], CARD_WIDTH, CARD_HEIGHT);
+        card.setPosition(a, getHeight()-CARD_HEIGHT);
+        hand.push(card);
+        a += CARD_WIDTH/2;
+    }
+}
+
+// This function is setup the background.
+function setupTable(){
+    setSize(TABLE_SIZE, TABLE_SIZE);
+    let rect = new Rectangle(getWidth(), getHeight());
+    add(rect);
+}
+
+// This function is draw the background table.
+function drawTable(){
+    for(let i = 0;i < 8; i++){
+        if(hand[i]){
+            hand[i].draw();
+        }
+    }
+}
